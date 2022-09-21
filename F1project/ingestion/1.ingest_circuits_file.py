@@ -76,8 +76,3 @@ circuits_final_df = circuits_renamed_df.withColumn("ingestion_date", current_tim
 # COMMAND ----------
 
 circuits_final_df.write.mode("overwrite").parquet("/mnt/martvaformula1dl/processed/circuits")
-
-# COMMAND ----------
-
-df = spark.read.parquet("/mnt/martvaformula1dl/processed/circuits")
-display(df)
