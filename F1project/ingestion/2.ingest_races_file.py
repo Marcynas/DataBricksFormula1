@@ -71,8 +71,8 @@ races_final_df  = races_withTimestamp_df.select(col("race_id"),col("race_year"),
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 7 - Writing data to datalake as parquet
+# MAGIC ### step 7 - Writing data to datalake as parquet (partitioned)
 
 # COMMAND ----------
 
-races_final_df.write.mode("overwrite").parquet("/mnt/martvaformula1dl/processed/races")
+races_final_df.write.mode("overwrite").partitionBy('name').parquet("/mnt/martvaformula1dl/processed/races")
