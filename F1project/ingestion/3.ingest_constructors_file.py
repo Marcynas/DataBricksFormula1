@@ -13,7 +13,7 @@ v_data_source = dbutils.widgets.get("p_data_source")
 
 # COMMAND ----------
 
-from pyspark.sql.functions import current_timestamp
+from pyspark.sql.functions import current_timestamp, lit
 
 # COMMAND ----------
 
