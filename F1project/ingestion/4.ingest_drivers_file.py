@@ -4,6 +4,11 @@
 
 # COMMAND ----------
 
+dbutils.widgets.text("p_data_source","")
+v_data_source = dbutils.widgets.get("p_data_source")
+
+# COMMAND ----------
+
 # MAGIC %run "../includes/configuration"
 
 # COMMAND ----------
@@ -51,8 +56,9 @@ drivers_df = spark.read.schema(drivers_schema) \
 drivers_renamed_df = drivers_df \
 .withColumnRenamed("driverId", "driver_id") \
 .withColumnRenamed("driverRef", "driver_ref") \
-.withColumn("ingestion_date", current_timestamp()) \
-.withColumn("name", concat(col("name.forename"), lit(" "), col("name.surname")))
+.withColumn("name", concat(col("name.forename"), lit(" "), col("name.surname"))) \
+.withColumn("data_source", lit(v_data_source)) \
+.withColumn("ingestion_date", current_timestamp()) 
 
 # COMMAND ----------
 

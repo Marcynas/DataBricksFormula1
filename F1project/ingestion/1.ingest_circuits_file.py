@@ -4,11 +4,16 @@
 
 # COMMAND ----------
 
+dbutils.widgets.text("p_data_source","")
+v_data_source = dbutils.widgets.get("p_data_source")
+
+# COMMAND ----------
+
 # MAGIC %run "../includes/configuration"
 
 # COMMAND ----------
 
-from pyspark.sql.functions import current_timestamp, col
+from pyspark.sql.functions import current_timestamp, col, lit
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DoubleType
 
 # COMMAND ----------
@@ -56,7 +61,8 @@ circuits_renamed_df = circuits_selected_df \
 .withColumnRenamed("circuitRed", ("circuit_ref")) \
 .withColumnRenamed("lat", ("latitude")) \
 .withColumnRenamed("lng", ("longitude")) \
-.withColumnRenamed("alt", ("altitude")) 
+.withColumnRenamed("alt", ("altitude")) \
+.withColumn("data_source", lit(v_data_source))
 
 # COMMAND ----------
 

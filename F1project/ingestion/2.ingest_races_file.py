@@ -4,6 +4,11 @@
 
 # COMMAND ----------
 
+dbutils.widgets.text("p_data_source","")
+v_data_source = dbutils.widgets.get("p_data_source")
+
+# COMMAND ----------
+
 # MAGIC %run "../includes/configuration"
 
 # COMMAND ----------
@@ -45,7 +50,8 @@ races_renamed_df = races_df \
 .withColumnRenamed("raceID", ("race_id")) \
 .withColumnRenamed("year", ("race_year")) \
 .withColumnRenamed("circuitId", ("circuit_id")) \
-.withColumnRenamed("lng", ("longitude")) 
+.withColumnRenamed("lng", ("longitude")) \
+.withColumn("data_source", lit(v_data_source))
 
 # COMMAND ----------
 
