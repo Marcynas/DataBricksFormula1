@@ -78,3 +78,7 @@ drivers_final_df = drivers_renamed_df \
 # COMMAND ----------
 
 drivers_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}drivers")
+
+# COMMAND ----------
+
+dbutils.notebook.exit("Done 😎")

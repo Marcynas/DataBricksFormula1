@@ -78,3 +78,7 @@ results_final_df = results_df \
 # COMMAND ----------
 
 results_final_df.write.mode("overwrite").partitionBy("race_id").parquet(f"{processed_folder_path}results")
+
+# COMMAND ----------
+
+dbutils.notebook.exit("Done 😎")

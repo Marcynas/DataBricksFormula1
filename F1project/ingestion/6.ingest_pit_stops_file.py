@@ -64,3 +64,7 @@ pit_stops_final_df = pit_stops_df \
 # COMMAND ----------
 
 pit_stops_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}pit_stops")
+
+# COMMAND ----------
+
+dbutils.notebook.exit("Done 😎")

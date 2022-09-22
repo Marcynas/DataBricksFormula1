@@ -81,3 +81,7 @@ circuits_final_df = circuits_renamed_df.withColumn("ingestion_date", current_tim
 # COMMAND ----------
 
 circuits_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}circuits")
+
+# COMMAND ----------
+
+dbutils.notebook.exit("Done 😎")

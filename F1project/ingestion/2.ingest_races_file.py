@@ -81,3 +81,7 @@ races_final_df  = races_withTimestamp_df.select(col("race_id"),col("race_year"),
 # COMMAND ----------
 
 races_final_df.write.mode("overwrite").partitionBy('name').parquet(f"{processed_folder_path}races")
+
+# COMMAND ----------
+
+dbutils.notebook.exit("Done 😎")
