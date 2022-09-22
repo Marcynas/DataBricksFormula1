@@ -49,7 +49,3 @@ constructor_final_df = constructor_dropped_df \
 # COMMAND ----------
 
 constructor_final_df.write.mode("overwrite").parquet("/mnt/martvaformula1dl/processed/constructors")
-
-# COMMAND ----------
-
-
