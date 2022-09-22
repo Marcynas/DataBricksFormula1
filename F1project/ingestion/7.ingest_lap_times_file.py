@@ -26,7 +26,7 @@ lap_times_schema = StructType(fields=[
 # COMMAND ----------
 
 lap_times_df = spark.read.schema(lap_times_schema) \
-.json("/mnt/martvaformula1dl/raw/lap_times")
+.csv("/mnt/martvaformula1dl/raw/lap_times")
 
 # COMMAND ----------
 
