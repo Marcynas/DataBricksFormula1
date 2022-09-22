@@ -4,6 +4,10 @@
 
 # COMMAND ----------
 
+# MAGIC %run "../includes/configuration"
+
+# COMMAND ----------
+
 from pyspark.sql.functions import current_timestamp, col, concat, lit
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DateType, FloatType
 
@@ -38,7 +42,7 @@ results_schema = StructType(fields=[
 # COMMAND ----------
 
 results_df = spark.read.schema(results_schema) \
-.json("dbfs:/mnt/martvaformula1dl/raw/results.json")
+.json(f"{raw_folder_path}results.json")
 
 # COMMAND ----------
 
@@ -67,4 +71,4 @@ results_final_df = results_df \
 
 # COMMAND ----------
 
-results_final_df.write.mode("overwrite").partitionBy("race_id").parquet("/mnt/martvaformula1dl/processed/results")
+results_final_df.write.mode("overwrite").partitionBy("race_id").parquet(f"{processed_folder_path}results")

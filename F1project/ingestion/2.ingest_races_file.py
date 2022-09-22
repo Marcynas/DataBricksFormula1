@@ -4,8 +4,7 @@
 
 # COMMAND ----------
 
-# MAGIC %md
-# MAGIC ### step 1 - Imports
+# MAGIC %run "../includes/configuration"
 
 # COMMAND ----------
 
@@ -15,7 +14,7 @@ from pyspark.sql.types import StructType, StructField, IntegerType, StringType, 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 2 - Creating schema and reading races.csv file
+# MAGIC ### step 1 - Creating schema and reading races.csv file
 
 # COMMAND ----------
 
@@ -32,12 +31,12 @@ races_schema = StructType(fields=[StructField("raceId", IntegerType(), False),
 # COMMAND ----------
 
 races_df = spark.read.option("header",True).schema(races_schema) \
-.csv("dbfs:/mnt/martvaformula1dl/raw/races.csv")
+.csv(f"{raw_folder_path}races.csv")
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 3 - Renaming columns
+# MAGIC ### step 2 - Renaming columns
 # MAGIC Can be done in step 5 using .alias()
 
 # COMMAND ----------
@@ -51,7 +50,7 @@ races_renamed_df = races_df \
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 4 - Adding ingestion timestamp and race_timestamp
+# MAGIC ### step 3 - Adding ingestion timestamp and race_timestamp
 
 # COMMAND ----------
 
@@ -62,7 +61,7 @@ races_withTimestamp_df = races_renamed_df \
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 5 - Sellecting important columns
+# MAGIC ### step 4 - Sellecting important columns
 
 # COMMAND ----------
 
@@ -71,8 +70,8 @@ races_final_df  = races_withTimestamp_df.select(col("race_id"),col("race_year"),
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 7 - Writing data to datalake as parquet (partitioned)
+# MAGIC ### step 5 - Writing data to datalake as parquet (partitioned)
 
 # COMMAND ----------
 
-races_final_df.write.mode("overwrite").partitionBy('name').parquet("/mnt/martvaformula1dl/processed/races")
+races_final_df.write.mode("overwrite").partitionBy('name').parquet(f"{processed_folder_path}races")

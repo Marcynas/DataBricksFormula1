@@ -4,6 +4,10 @@
 
 # COMMAND ----------
 
+# MAGIC %run "../includes/configuration"
+
+# COMMAND ----------
+
 from pyspark.sql.functions import current_timestamp, col, concat, lit
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DateType, FloatType, TimestampType
 
@@ -28,7 +32,7 @@ pit_stops_schema = StructType(fields=[
 
 pit_stops_df = spark.read.schema(pit_stops_schema) \
 .option("multiline", True) \
-.json("/mnt/martvaformula1dl/raw/pit_stops.json")
+.json(f"{raw_folder_path}pit_stops.json")
 
 # COMMAND ----------
 
@@ -53,4 +57,4 @@ pit_stops_final_df = pit_stops_df \
 
 # COMMAND ----------
 
-pit_stops_final_df.write.mode("overwrite").parquet("/mnt/martvaformula1dl/processed/pit_stops")
+pit_stops_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}pit_stops")

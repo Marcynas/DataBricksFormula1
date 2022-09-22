@@ -4,6 +4,10 @@
 
 # COMMAND ----------
 
+# MAGIC %run "../includes/configuration"
+
+# COMMAND ----------
+
 from pyspark.sql.functions import current_timestamp, col, concat, lit
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DateType, FloatType, TimestampType
 
@@ -26,7 +30,7 @@ lap_times_schema = StructType(fields=[
 # COMMAND ----------
 
 lap_times_df = spark.read.schema(lap_times_schema) \
-.csv("/mnt/martvaformula1dl/raw/lap_times")
+.csv(f"{raw_folder_path}lap_times")
 
 # COMMAND ----------
 
@@ -47,4 +51,4 @@ lap_times_final_df = lap_times_df \
 
 # COMMAND ----------
 
-lap_times_final_df.write.mode("overwrite").parquet("/mnt/martvaformula1dl/processed/lap_times")
+lap_times_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}lap_times")

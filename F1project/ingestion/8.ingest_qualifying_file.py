@@ -4,6 +4,10 @@
 
 # COMMAND ----------
 
+# MAGIC %run "../includes/configuration"
+
+# COMMAND ----------
+
 from pyspark.sql.functions import current_timestamp, col, concat, lit
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DateType, FloatType, TimestampType
 
@@ -29,7 +33,7 @@ qualifying_schema = StructType(fields=[
 # COMMAND ----------
 
 qualifying_df = spark.read.schema(qualifying_schema).option("multiLine",True) \
-.json("/mnt/martvaformula1dl/raw/qualifying")
+.json(f"{raw_folder_path}qualifying")
 
 # COMMAND ----------
 
@@ -51,4 +55,4 @@ qualifying_final_df = qualifying_df \
 
 # COMMAND ----------
 
-qualifying_final_df.write.mode("overwrite").parquet("/mnt/martvaformula1dl/processed/qualifying")
+qualifying_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}qualifying")

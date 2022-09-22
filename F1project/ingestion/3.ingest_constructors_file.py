@@ -4,6 +4,10 @@
 
 # COMMAND ----------
 
+# MAGIC %run "../includes/configuration"
+
+# COMMAND ----------
+
 from pyspark.sql.functions import current_timestamp
 
 # COMMAND ----------
@@ -18,7 +22,7 @@ constructors_schema = "constructorId INT, constructorRef STRING, name STRING, na
 # COMMAND ----------
 
 constructor_df = spark.read.schema(constructors_schema) \
-.json("dbfs:/mnt/martvaformula1dl/raw/constructors.json")
+.json(f"{raw_folder_path}constructors.json")
 
 # COMMAND ----------
 
@@ -48,4 +52,4 @@ constructor_final_df = constructor_dropped_df \
 
 # COMMAND ----------
 
-constructor_final_df.write.mode("overwrite").parquet("/mnt/martvaformula1dl/processed/constructors")
+constructor_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}constructors")

@@ -4,6 +4,10 @@
 
 # COMMAND ----------
 
+# MAGIC %run "../includes/configuration"
+
+# COMMAND ----------
+
 from pyspark.sql.functions import current_timestamp, col, concat, lit
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DateType
 
@@ -35,7 +39,7 @@ drivers_schema = StructType(fields=[
 # COMMAND ----------
 
 drivers_df = spark.read.schema(drivers_schema) \
-.json("dbfs:/mnt/martvaformula1dl/raw/drivers.json")
+.json(f"{raw_folder_path}drivers.json")
 
 # COMMAND ----------
 
@@ -67,4 +71,4 @@ drivers_final_df = drivers_renamed_df \
 
 # COMMAND ----------
 
-drivers_final_df.write.mode("overwrite").parquet("/mnt/martvaformula1dl/processed/drivers")
+drivers_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}drivers")
