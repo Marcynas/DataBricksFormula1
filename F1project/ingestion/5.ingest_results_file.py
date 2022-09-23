@@ -51,6 +51,10 @@ results_df = spark.read.schema(results_schema) \
 
 # COMMAND ----------
 
+display(results_final_df)
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC ### step 2 - rename and add new columns
 
@@ -60,7 +64,7 @@ results_final_df = results_df \
 .withColumnRenamed("resultId", "result_id") \
 .withColumnRenamed("raceId","race_id") \
 .withColumnRenamed("driverId", "driver_id") \
-.withColumnRenamed("constructodId","constructor_id") \
+.withColumnRenamed("constructorId","constructor_id") \
 .withColumnRenamed("positionText","position_text") \
 .withColumnRenamed("positionOrder","position_Order") \
 .withColumnRenamed("fastestLap","fastest_lap") \
