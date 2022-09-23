@@ -19,19 +19,11 @@ constructor_standings_df = race_results_df \
 
 # COMMAND ----------
 
-display(constructor_standings_df)
-
-# COMMAND ----------
-
 constructor_rank_spec = Window.partitionBy("race_year").orderBy(desc("total_points"), desc("wins"))
 
 # COMMAND ----------
 
 final_df = constructor_standings_df.withColumn("rank", rank().over(constructor_rank_spec))
-
-# COMMAND ----------
-
-display(final_df)
 
 # COMMAND ----------
 

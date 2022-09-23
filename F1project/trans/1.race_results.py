@@ -51,10 +51,6 @@ joined_races_circuits_df = races_df \
 
 # COMMAND ----------
 
-display(joined_races_circuits_df)
-
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC ### Joining results with other tables
 
@@ -69,10 +65,6 @@ semi_final_df = results_df \
 
 final_df = semi_final_df.select("race_year","race_name","race_date","circuit_location","driver_name","driver_number","driver_nationality","team","grid","fastest_lap","race_time","points","position") \
 .withColumn("crated_date", current_timestamp())
-
-# COMMAND ----------
-
-display(final_df)
 
 # COMMAND ----------
 
