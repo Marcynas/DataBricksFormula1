@@ -51,10 +51,6 @@ results_df = spark.read.schema(results_schema) \
 
 # COMMAND ----------
 
-display(results_final_df)
-
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC ### step 2 - rename and add new columns
 
