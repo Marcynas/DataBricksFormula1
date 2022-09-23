@@ -9,7 +9,6 @@
 
 unmount_adls(storage_account_name, containers)
 
-
 # COMMAND ----------
 
 mount_adls(storage_account_name, containers, secret)
