@@ -59,11 +59,20 @@ pit_stops_final_df = pit_stops_df \
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 3 - write the data to parquet
+# MAGIC ~~step 3 - write the data to parquet~~
 
 # COMMAND ----------
 
-pit_stops_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}pit_stops")
+# pit_stops_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}pit_stops")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### step 3 - Writing data to f1_proccesed database as parquet
+
+# COMMAND ----------
+
+pit_stops_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.pit_stops")
 
 # COMMAND ----------
 

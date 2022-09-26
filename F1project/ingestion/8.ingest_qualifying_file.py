@@ -57,11 +57,20 @@ qualifying_final_df = qualifying_df \
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 3 - write the data to parquet
+# MAGIC ~~step 3 - write the data to parquet~~
 
 # COMMAND ----------
 
-qualifying_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}qualifying")
+# qualifying_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}qualifying")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### step 3 - Writing data to f1_proccesed database as parquet
+
+# COMMAND ----------
+
+qualifying_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.qualifying")
 
 # COMMAND ----------
 

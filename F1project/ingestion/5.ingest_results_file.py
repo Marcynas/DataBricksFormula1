@@ -73,11 +73,20 @@ results_final_df = results_df \
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 3 - write the data to parquet
+# MAGIC ~~step 3 - write the data to parquet~~
 
 # COMMAND ----------
 
-results_final_df.write.mode("overwrite").partitionBy("race_id").parquet(f"{processed_folder_path}results")
+# results_final_df.write.mode("overwrite").partitionBy("race_id").parquet(f"{processed_folder_path}results")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### step 3 - Writing data to f1_proccesed database as parquet
+
+# COMMAND ----------
+
+results_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.results")
 
 # COMMAND ----------
 

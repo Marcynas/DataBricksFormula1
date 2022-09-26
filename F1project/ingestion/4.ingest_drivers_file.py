@@ -73,11 +73,20 @@ drivers_final_df = drivers_renamed_df \
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 4 - write the data to parquet
+# MAGIC ~~step 4 - write the data to parquet~~
 
 # COMMAND ----------
 
-drivers_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}drivers")
+# drivers_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}drivers")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### step 4 - Writing data to f1_proccesed database as parquet
+
+# COMMAND ----------
+
+drivers_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.drivers")
 
 # COMMAND ----------
 

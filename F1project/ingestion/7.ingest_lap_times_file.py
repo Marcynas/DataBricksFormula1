@@ -53,11 +53,20 @@ lap_times_final_df = lap_times_df \
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 3 - write the data to parquet
+# MAGIC ~~step 3 - write the data to parquet~~
 
 # COMMAND ----------
 
-lap_times_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}lap_times")
+# lap_times_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}lap_times")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### step 3 - Writing data to f1_proccesed database as parquet
+
+# COMMAND ----------
+
+lap_times_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.lap_times")
 
 # COMMAND ----------
 

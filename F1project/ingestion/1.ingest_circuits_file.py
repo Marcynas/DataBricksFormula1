@@ -76,11 +76,20 @@ circuits_final_df = circuits_renamed_df.withColumn("ingestion_date", current_tim
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 5 - Writing data to datalake as parquet
+# MAGIC ~~step 5 - Writing data to datalake as parquet~~
 
 # COMMAND ----------
 
-circuits_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}circuits")
+# circuits_final_df.write.mode("overwrite").parquet(f"{processed_folder_path}circuits")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### step 5 - Writing data to f1_proccesed database as parquet
+
+# COMMAND ----------
+
+circuits_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.circuits")
 
 # COMMAND ----------
 

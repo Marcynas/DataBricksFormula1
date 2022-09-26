@@ -76,11 +76,20 @@ races_final_df  = races_withTimestamp_df.select(col("race_id"),col("race_year"),
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### step 5 - Writing data to datalake as parquet (partitioned)
+# MAGIC ~~step 5 - Writing data to datalake as parquet (partitioned)~~
 
 # COMMAND ----------
 
-races_final_df.write.mode("overwrite").partitionBy('name').parquet(f"{processed_folder_path}races")
+# races_final_df.write.mode("overwrite").partitionBy('name').parquet(f"{processed_folder_path}races")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### step 5 - Writing data to f1_proccesed database as parquet
+
+# COMMAND ----------
+
+races_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.races")
 
 # COMMAND ----------
 
