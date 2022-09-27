@@ -27,4 +27,4 @@ final_df = constructor_standings_df.withColumn("rank", rank().over(constructor_r
 
 # COMMAND ----------
 
-final_df.write.parquet(f"{presentation_folder_path}constructor_standings")
+final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_presentation.constructor_standings")

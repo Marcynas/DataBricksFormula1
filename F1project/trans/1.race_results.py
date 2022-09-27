@@ -68,4 +68,8 @@ final_df = semi_final_df.select("race_year","race_name","race_date","circuit_loc
 
 # COMMAND ----------
 
-final_df.write.mode("overwrite").parquet(f"{presentation_folder_path}race_results")
+# final_df.write.mode("overwrite").parquet(f"{presentation_folder_path}race_results")
+
+# COMMAND ----------
+
+final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_presentation.race_results")
