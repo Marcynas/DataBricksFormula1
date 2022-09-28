@@ -80,7 +80,9 @@ qualifying_final_df = qualifying_df \
 
 # COMMAND ----------
 
-overwrite_partition(qualifying_final_df,'f1_processed','qualifying','qualify_id')
+# overwrite_partition(qualifying_final_df,'f1_processed','qualifying','qualify_id')
+merge_condition = "tgt.qualify_id = src.qualify_id"
+merge_delta_data(qualifying_final_df,'f1_processed','qualifying', processed_folder_path, merge_condition, 'race_id')
 
 # COMMAND ----------
 

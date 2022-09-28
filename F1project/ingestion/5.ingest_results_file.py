@@ -82,6 +82,10 @@ results_final_df = results_df \
 
 # COMMAND ----------
 
+results_deduped_df =results_final_df.dropDuplicates(['race_id','driver_id'])
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC ~~step 3 - write the data to parquet~~
 
@@ -106,7 +110,8 @@ results_final_df = results_df \
 
 # COMMAND ----------
 
-overwrite_partition(results_final_df,'f1_processed','results','race_id')
+merge_condition = "tgt.result_id = src.result_id AND tgt.race_id = src.race_id"
+merge_delta_data(results_deduped_df,'f1_processed','results', processed_folder_path, merge_condition, 'race_id')
 
 # COMMAND ----------
 

@@ -95,7 +95,7 @@ races_final_df  = races_withTimestamp_df.select(col("race_id"),col("race_year"),
 
 # COMMAND ----------
 
-races_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.races")
+races_final_df.write.mode("overwrite").format("delta").saveAsTable("f1_processed.races")
 
 # COMMAND ----------
 
