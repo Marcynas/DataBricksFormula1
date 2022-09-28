@@ -17,3 +17,13 @@ def overwrite_partition(input_df,db_name,table_name,partition_column):
         output_df.write.mode("overwrite").insertInto(f"{db_name}.{table_name}")
     else:
         output_df.write.mode("overwrite").partitionBy(f"{partition_column}").format("parquet").saveAsTable(f"{db_name}.{table_name}")
+
+# COMMAND ----------
+
+def df_column_to_list(input_df, column_name):
+    df_row_list = input_df.select(column_name) \
+    .distinct() \
+    .collect
+    
+    column_value_list = [row[column_name] for row in df_row_list]
+    return column_value_list

@@ -3,6 +3,15 @@
 
 # COMMAND ----------
 
+# MAGIC %run "../includes/common_functions"
+
+# COMMAND ----------
+
+dbutils.widgets.text("p_file_date","2021-03-21")
+v_file_date = dbutils.widgets.get("p_file_date")
+
+# COMMAND ----------
+
 from pyspark.sql.functions import col, current_timestamp
 
 # COMMAND ----------
@@ -31,12 +40,15 @@ constructors_df = spark.read.parquet(f"{processed_folder_path}constructors") \
 
 races_df = spark.read.parquet(f"{processed_folder_path}races") \
 .withColumnRenamed("name","race_name") \
-.withColumnRenamed("race_timestamp","race_date")
+.withColumnRenamed("race_timestamp","v_race_date")
 
 # COMMAND ----------
 
 results_df = spark.read.parquet(f"{processed_folder_path}results") \
-.withColumnRenamed("time","race_time")
+.filter(f"file_date = '{v_file_date}''")
+.withColumnRenamed("time","race_time") \
+.withColumnRenamed("race_id","result_race_id") \
+.withColumnRenamed("file_date", "result_file_date")
 
 # COMMAND ----------
 
@@ -57,14 +69,15 @@ joined_races_circuits_df = races_df \
 # COMMAND ----------
 
 semi_final_df = results_df \
-.join(joined_races_circuits_df, results_df.race_id == joined_races_circuits_df.race_id) \
+.join(joined_races_circuits_df, results_df.result_race_id == joined_races_circuits_df.race_id) \
 .join(drivers_df, results_df.driver_id == drivers_df.driver_id) \
 .join(constructors_df, results_df.constructor_id == constructors_df.constructor_id)
 
 # COMMAND ----------
 
-final_df = semi_final_df.select("race_year","race_name","race_date","circuit_location","driver_name","driver_number","driver_nationality","team","grid","fastest_lap","race_time","points","position") \
-.withColumn("crated_date", current_timestamp())
+final_df = semi_final_df.select("race_id","race_year","race_name","race_date","circuit_location","driver_name","driver_number","driver_nationality","team","grid","fastest_lap","race_time","points","position","result_file_date") \
+.withColumn("crated_date", current_timestamp()) \
+.withColumn("result_file_date", "file_date")
 
 # COMMAND ----------
 
@@ -72,4 +85,4 @@ final_df = semi_final_df.select("race_year","race_name","race_date","circuit_loc
 
 # COMMAND ----------
 
-final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_presentation.race_results")
+overwrite_partition(final_df,'f1_presentation','race_results','race_id')
