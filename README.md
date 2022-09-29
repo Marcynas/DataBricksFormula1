@@ -16,3 +16,6 @@ Imitating real world data project
 * https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/articles/azure-databricks-modern-analytics-architecture
 
 ![Architecture image](https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/media/azure-databricks-modern-analytics-architecture-diagram.png)
+
+### Completed:
+![Architecture image](https://github.com/Marcynas/DataBricksFormula1/blob/master/architecture.png?raw=true)
